@@ -23,16 +23,27 @@ def encode(password):
         encode_pwd.append(str(new_num))  # adds new number to list
     return "".join(encode_pwd)  # coverts list of new numbers into a string
 
+
+def decode_password(encoded_password):
+    constant_value = 3  # Making sure each digit gets shifted down by 3 numbers
+    original_password = []  # Creating empty list to store original password
+    for digit in encoded_password:
+        original_digit = str((int(digit) - constant_value + 10) % 10)  # Subtract 3 from each digit
+        original_password.append(original_digit)
+    return ''.join(original_password)  # returning the original password
+
+
+
 if __name__ == "__main__":
-    option = 0
-    while option != "3":
+    option = 0  # dummy variable for while loop
+    while option != "3":  # while loop for when option is not equal to 3
         option = main_menu()
-        if option == "1":
+        if option == "1":  # if user picks option 1, encode the original password
             password = input("Please enter your password to encode: ")
             current_pwd = encode(password)
-            print("Your password has been encoded and stored!")
-        elif option == "2":
-            orginal_pwd = 0
-            print(f"The encoded password is {current_pwd}, and the original password is {orginal_pwd}")
-        elif option == "3":
+            print("Your password has been encoded and stored!\n")
+        elif option == "2":  # if user picks option 2, decode the encoded password
+            orginal_pwd = decode_password(current_pwd)
+            print(f"The encoded password is {current_pwd}, and the original password is {orginal_pwd}.\n")
+        elif option == "3":  # if user picks option 3, break
             break
